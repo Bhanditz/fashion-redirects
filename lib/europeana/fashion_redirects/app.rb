@@ -22,10 +22,10 @@ module Europeana
       get '*' do
         path = params['splat'].first
 
-        if path == '/portal/eventdetail.html'
+        if (path == '/portal/eventdetail.html') && params.key?('event')
           # Lookup redirects for URLs like /portal/eventdetail.html?event=exhibition-brides-at-the-leventis-museum
           # at /all-events/exhibition-brides-at-the-leventis-museum/
-          src = "/all-events/#{params[:event]}/"
+          src = "/all-events/#{params['event']}/"
         else
           src = path
         end
