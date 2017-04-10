@@ -12,7 +12,8 @@
 /coverage/
 
 # Ignore log files
-/log
+/log/*
+*.log
 
 # Ignore IDE files
 /.idea
