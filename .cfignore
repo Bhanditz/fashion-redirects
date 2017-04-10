@@ -6,4 +6,4 @@
 /coverage/
 
 # Ignore log files
-/log
+/log/*
