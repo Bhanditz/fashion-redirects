@@ -36,7 +36,7 @@ namespace :fashion do
         Redirect.find_or_create_by(src: src).tap do |redirect|
           redirect.dst = dst
           redirect.site = 'portal'
-          redirect.save
+          redirect.save!
         end
       end
 
