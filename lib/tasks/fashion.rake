@@ -21,17 +21,35 @@ namespace :fashion do
     while !cursor.nil?
       File.write(cursor_log, cursor, mode: 'w+')
 
-      results = Europeana::API.record.search(query: 'PROVIDER:"Europeana Fashion"', rows: 100, cursor: cursor, profile: 'minimal')
+      results = Europeana::API.record.search(query: 'PROVIDER:"Europeana Fashion"', qf: 'DATA_PROVIDER:"KMKG-MRAH"', rows: 100, cursor: cursor, profile: 'minimal')
       break unless results.key?(:items)
 
       results[:items].each do |item|
         i = i + 1
+        print "[#{i}] "
+
         id = item[:id]
+
         redirect_uri = URI.parse(item[:edmIsShownAt].first)
         edm_is_shown_at_uri = URI.parse(CGI.parse(redirect_uri.query)['shownAt'].first)
-        src = edm_is_shown_at_uri.path
+
+        if edm_is_shown_at_uri.host == 'www.europeanafashion.eu'
+          src = edm_is_shown_at_uri.path
+        else
+          record = Europeana::API.record.fetch(id: id)
+          fashion_portal_web_resource = record['object']['aggregations'].first['webResources'].detect { |wr| wr[:about].start_with?('http://www.europeanafashion.eu/record/') }
+
+          if fashion_portal_web_resource.nil?
+            puts "no www.europeanafashion.eu web resource for item #{id}; skipping"
+            next
+          end
+
+          fashion_portal_uri = URI.parse(fashion_portal_web_resource[:about])
+          src = fashion_portal_uri.path
+        end
+
         dst = "/portal/record#{id}.html"
-        puts "[#{i}] #{src} => #{dst}"
+        puts "#{src} => #{dst}"
 
         Redirect.find_or_create_by(src: src).tap do |redirect|
           redirect.dst = dst
