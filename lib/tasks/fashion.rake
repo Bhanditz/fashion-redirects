@@ -21,7 +21,7 @@ namespace :fashion do
     while !cursor.nil?
       File.write(cursor_log, cursor, mode: 'w+')
 
-      results = Europeana::API.record.search(query: 'PROVIDER:"Europeana Fashion"', qf: 'DATA_PROVIDER:"KMKG-MRAH"', rows: 100, cursor: cursor, profile: 'minimal')
+      results = Europeana::API.record.search(query: 'PROVIDER:"Europeana Fashion"', rows: 100, cursor: cursor, profile: 'minimal')
       break unless results.key?(:items)
 
       results[:items].each do |item|
