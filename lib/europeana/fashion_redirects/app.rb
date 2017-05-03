@@ -19,9 +19,11 @@ module Europeana
         }
       end
 
-      get '*' do
-        path = params['splat'].first
+      get '/download/*' do |download_path|
+        redirect to('http://files.europeanafashion.eu/download/' + download_path), 302
+      end
 
+      get '*' do |path|
         if (path == '/portal/eventdetail.html') && params.key?('event')
           # Lookup redirects for URLs like /portal/eventdetail.html?event=exhibition-brides-at-the-leventis-museum
           # at /all-events/exhibition-brides-at-the-leventis-museum/
