@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
 
-ruby '2.3.1'
-
 gem 'europeana-api', github: 'europeana/europeana-api-client-ruby', branch: 'develop'
 gem 'newrelic_rpm'
 gem 'pg'
@@ -20,7 +18,7 @@ end
 
 group :development, :test do
   gem 'dotenv'
-  gem 'rubocop', '0.39.0', require: false # only update when Hound does
+  gem 'rubocop', '0.54', require: false
 end
 
 group :development do
@@ -28,7 +26,6 @@ group :development do
 end
 
 group :test do
-  gem 'coveralls', require: false
   gem 'minitest'
   gem 'rack-test', require: 'rack/test'
   gem 'simplecov', require: false
