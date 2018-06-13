@@ -7,4 +7,6 @@ Bundler.require(:default, ENV['RACK_ENV'])
 
 Dotenv.load if defined?(Dotenv)
 
+ENV['DATABASE_URL'] = ENV['POSTGRES_URI'] unless ENV['POSTGRES_URI'].blank?
+
 require 'europeana/fashion_redirects'

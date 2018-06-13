@@ -7,8 +7,10 @@ Sinatra app to handle redirects for Europeana Fashion URLs
 Fashion hashes and equivalent Europeana record IDs are expected to be stored in
 PostgreSQL.
 
-Set the environment variable `DATABASE_URL` to the URL of the PostgreSQL
-database, e.g. `DATABASE_URL="postgres://fashion@localhost/fashion_redirects"`
+Set one of the environment variables `DATABASE_URL` or `POSTGRES_URI` to the URI
+of the PostgreSQL database, e.g.
+`DATABASE_URL="postgres://fashion@localhost/fashion_redirects"`. If both are set,
+`POSTGRES_URI` will take precedence.
 
 Initialise the database with `bundle exec rake db:setup`. The seed script will
 add an initial set of static page redirects.
