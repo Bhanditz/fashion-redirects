@@ -1,27 +1,8 @@
 # Europeana Fashion Redirects
 
-Sinatra app to handle redirects for Europeana Fashion URLs
+**This project is no longer maintained.**
 
-## Configuration
-
-Fashion hashes and equivalent Europeana record IDs are expected to be stored in
-PostgreSQL.
-
-Set one of the environment variables `DATABASE_URL` or `POSTGRES_URI` to the URI
-of the PostgreSQL database, e.g.
-`DATABASE_URL="postgres://fashion@localhost/fashion_redirects"`. If both are set,
-`POSTGRES_URI` will take precedence.
-
-Initialise the database with `bundle exec rake db:setup`. The seed script will
-add an initial set of static page redirects.
-
-To further populate the database with redirects for Europeana Fashion from the
-Europeana Search/Record API, set your API key in the environment variable
-`API_KEY` then use `bundle exec rake fashion:items`.
-
-## Usage
-
-Start the app using Puma: `bundle exec puma -C config/puma.rb`
+It has been superceded by [atc-fashion](https://github.com/europeana/atc-fashion).
 
 ## License
 
